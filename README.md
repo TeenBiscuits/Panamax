@@ -12,7 +12,7 @@ SPDX-License-Identifier: MIT
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 
 **Panamax** 🚢📦 es una recopilación de [Docker Composes](https://docs.docker.com/compose/) que me han sido útiles a lo largo
-de mi breve experiencia como [Self-Hoster](https://es.wikipedia.org/wiki/Self-hosting).
+de mi breve experiencia como [Self-Hoster](https://es.wikipedia.org/wiki/Self-hosting). 💻🏠
 
 </div>
 
