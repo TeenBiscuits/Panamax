@@ -1,0 +1,6 @@
+# SPDX-FileCopyrightText: 2023 Pablo Portas López
+#
+# SPDX-License-Identifier: CC0-1.0
+
+# Nada de secretos expuestos en un repositorio público
+*.env
