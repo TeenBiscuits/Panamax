@@ -1,0 +1,98 @@
+# SPDX-FileCopyrightText: 2024 Pablo Portas López
+#
+# SPDX-License-Identifier: MIT
+
+#
+# ENCARECIDAMENTE, Immich esta en un desarrollo muy temprano y cambian mucho el 
+# docker compose, revisa que este bien.
+#
+# https://github.com/immich-app/immich/releases/latest/download/docker-compose.yml
+#
+
+# 'stack.env' es para la compatibilidad con Portainer.
+
+version: "3.8"
+
+services:
+  immich-server:
+    container_name: immich_server
+    image: ghcr.io/immich-app/immich-server:${IMMICH_VERSION:-release}
+    command: [ "start.sh", "immich" ]
+    volumes:
+      - ${UPLOAD_LOCATION}:/usr/src/app/upload
+      - /etc/localtime:/etc/localtime:ro
+    env_file:
+      - stack.env
+    #ports:
+    #  - 2283:3001
+    depends_on:
+      - redis
+      - database
+    restart: always
+    networks:
+      - internal
+      - proxy-network
+
+  immich-microservices:
+    container_name: immich_microservices
+    image: ghcr.io/immich-app/immich-server:${IMMICH_VERSION:-release}
+    devices: # this section is for hardware acceleration
+      - /dev/dri:/dev/dri
+    command: [ "start.sh", "microservices" ]
+    volumes:
+      - ${UPLOAD_LOCATION}:/usr/src/app/upload
+      - /etc/localtime:/etc/localtime:ro
+    env_file:
+      - stack.env
+    depends_on:
+      - redis
+      - database
+    restart: always
+    networks:
+      - internal
+
+  immich-machine-learning:
+    container_name: immich_machine_learning
+    # For hardware acceleration, add one of -[armnn, cuda, openvino] to the image tag.
+    # Example tag: ${IMMICH_VERSION:-release}-cuda
+    image: ghcr.io/immich-app/immich-machine-learning:${IMMICH_VERSION:-release}-openvino
+    device_cgroup_rules: # this section is for hardware acceleration
+      - "c 189:* rmw"
+    devices: # this section is for hardware acceleration
+      - /dev/dri:/dev/dri
+    volumes:
+      - model-cache:/cache
+    env_file:
+      - stack.env
+    restart: always
+    networks:
+      - internal
+
+  redis:
+    container_name: immich_redis
+    image: redis:6.2-alpine@sha256:51d6c56749a4243096327e3fb964a48ed92254357108449cb6e23999c37773c5
+    restart: always
+    networks:
+      - internal
+
+  database:
+    container_name: immich_postgres
+    image: tensorchord/pgvecto-rs:pg14-v0.2.0@sha256:90724186f0a3517cf6914295b5ab410db9ce23190a2d9d0b9dd6463e3fa298f0
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_DB: ${DB_DATABASE_NAME}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: always
+    networks:
+      - internal
+
+volumes:
+  pgdata:
+  model-cache:
+
+networks:
+  proxy-network:
+    external: true
+  internal:
