@@ -8,7 +8,8 @@ SPDX-License-Identifier: MIT
 
 <div align="center">
 
-[![C](https://img.shields.io/badge/Docker-2496ED.svg?logo=docker&logoColor=white)](https://www.docker.com/)
+[![Docker](https://img.shields.io/badge/Docker-2496ED.svg?logo=docker&logoColor=white)](https://www.docker.com/)
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 
 **Panamax** 🚢📦 es una recopilación de [Docker Composes](https://docs.docker.com/compose/) que me han sido útiles a lo largo
