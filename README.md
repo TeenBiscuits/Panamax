@@ -21,7 +21,7 @@ de mi breve experiencia como [Self-Hoster](https://es.wikipedia.org/wiki/Self-ho
 
 # Composes 📚
 
-
+-  🔐 **Nginx Proxy Manager** ( [Website](https://nginxproxymanager.com/) - [GitHub](https://github.com/NginxProxyManager/nginx-proxy-manager) ): Es un reverse-proxy muy cómodo y que requiere poco conocimiento técnico para exponer tus servicios, fué de los primeros reverse-proxys que aprendí a usar y sigue siendo mi elección principal.
 
 
 # ¿Porqué Panamax? 🚢

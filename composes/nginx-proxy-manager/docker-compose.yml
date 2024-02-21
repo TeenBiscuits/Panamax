@@ -1,0 +1,66 @@
+# SPDX-FileCopyrightText: 2024 Pablo Portas López
+#
+# SPDX-License-Identifier: MIT
+
+version: '3.8'
+services:
+  app:
+    image: 'jc21/nginx-proxy-manager:latest'
+    restart: unless-stopped
+    ports:
+      # Formato de los puertos <host-port>:<container-port>
+      - '80:80' # HTTP
+      - '443:443' # HTTPS
+      - '81:81' # Admin Web Port
+      
+      # Si quieres añadir cualquier otro servicio (puerto) que quieras controlar
+      # desde el proxy este es el sitio. Te dejo algunos ejemplos
+      # FTP
+      #- '21:21'
+      # Syncthing
+      #- '22000:22000/tcp' # Listening port (TCP)
+      #- '22000:22000/udp' # Listening port (UDP)
+      #- '21027:21027/udp' # Protocol discovery
+      # Plex
+      #- '32400:32400/tcp' # Access to the Plex Media Server
+
+    # Importante el healthchek para comprobar la salud del proxy (me salvó de más de un apuro)
+    healthcheck:
+      test: ["CMD", "/bin/check-health"]
+      interval: 10s
+      timeout: 3s
+    environment: # Variables que debes configurar
+      # Variables de la base de datos
+      # Mysql/Maria connection parameters:
+      - DB_MYSQL_HOST=db
+      - DB_MYSQL_PORT=3306
+      - DB_MYSQL_USER=${DB_USER} # Crea un usario al azar ('admin' no lo es)
+      - DB_MYSQL_PASSWORD=${DB_PASSWORD} # Te recomiendo generar un string de números y letras aleatorios
+      - DB_MYSQL_NAME=${DB_NAME} # Puede ser cualquier cosa
+      # Si la IPV6 no está activa descomenta esto.
+      # - DISABLE_IPV6=true
+    volumes: # La variable es la ruta en la que guardes los archivos del proxy '/mnt/DATA/nginx' por ejemplo
+      - ${DATA_DIR}/data:/data
+      - ${DATA_DIR}/letsencrypt:/etc/letsencrypt
+    depends_on:
+      - db
+
+  db:
+    image: 'jc21/mariadb-aria:latest'
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD} # Yo las dejo iguales - (puede que no sea lo mejor)
+      - MYSQL_DATABASE=${DB_NAME} # Puede ser cualquier cosa
+      - MYSQL_USER=${DB_USER} # Crea un usario al azar ('admin' no lo es)
+      - MYSQL_PASSWORD=${DB_PASSWORD} # Te recomiendo generar un string de números y letras aleatorios
+    volumes:
+      - ${DATA_DIR}/mysql:/var/lib/mysql
+
+
+# Se crea una subred llamada 'proxy-network' con el comando 'docker network create proxy-network'
+# asi los container se comunicarán en la subred de la maquina y no hará falta dejar puertos abiertos
+# inecesarios.
+networks:
+ default:
+  external:
+   name: proxy-network
