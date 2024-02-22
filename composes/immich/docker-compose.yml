@@ -55,6 +55,7 @@ services:
     container_name: immich_machine_learning
     # For hardware acceleration, add one of -[armnn, cuda, openvino] to the image tag.
     # Example tag: ${IMMICH_VERSION:-release}-cuda
+    # En mi caso lo dejo en openvino ya que tengo una CPU-GPU Intel
     image: ghcr.io/immich-app/immich-machine-learning:${IMMICH_VERSION:-release}-openvino
     device_cgroup_rules: # this section is for hardware acceleration
       - "c 189:* rmw"
