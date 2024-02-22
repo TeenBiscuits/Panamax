@@ -1,0 +1,57 @@
+# SPDX-FileCopyrightText: 2024 Pablo Portas López
+#
+# SPDX-License-Identifier: MIT
+
+version: '3'
+services:
+  netdata:
+    image: netdata/netdata:edge # El edge tiene las últimas características
+    container_name: netdata
+    hostname:  # set to fqdn of host
+    #ports: # Si quieres acceder por puerto, personalmente redirijo el netdata por proxy ya que no tiene auth
+    #  - 19999:19999
+    restart: unless-stopped
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - apparmor:unconfined
+    volumes:
+      - netdataconfig:/etc/netdata
+      - netdatalib:/var/lib/netdata
+      - netdatacache:/var/cache/netdata
+      - /etc/passwd:/host/etc/passwd:ro
+      - /etc/group:/host/etc/group:ro
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /etc/os-release:/host/etc/os-release:ro
+    environment:
+      - NETDATA_CLAIM_TOKEN=${CLAIM_TOKEN}
+      - NETDATA_CLAIM_URL=https://app.netdata.cloud
+      - NETDATA_CLAIM_ROOMS=${CLAIM_ROOMS}
+      - DOCKER_HOST=proxynetdata:2375
+    labels:
+      - "com.centurylinklabs.watchtower.scope=updater" # Utilizo esta label para que WatchTower actualice mis containers
+    networks:
+      - proxy-network
+      - internal
+  proxynetdata: # Proxy para ver nos nombres y otros datos del docker.sock
+    image: tecnativa/docker-socket-proxy
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    labels:
+      - "com.centurylinklabs.watchtower.scope=updater" # Utilizo esta label para que WatchTower actualice mis containers
+    environment:
+      - CONTAINERS=1
+    networks:
+      - internal
+
+volumes:
+  netdataconfig:
+  netdatalib:
+  netdatacache:
+
+networks:
+  proxy-network:
+    external: true
+  internal:
