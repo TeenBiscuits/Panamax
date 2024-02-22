@@ -26,6 +26,7 @@ de mi breve experiencia como [Self-Hoster](https://es.wikipedia.org/wiki/Self-ho
 - 📸 **Immich** ( [Website](https://immich.app/) - [GitHub](https://github.com/immich-app/immich) ): Es de esos proyectos que una vez los descubres solo puedes pensar donde han estado toda tu vida. Immich es el perfecto sustituto a iCloud Fotos y Google Fotos. Consume muchos recursos pero merece la pena.
 - 📊 **Netdata** ( [Website](https://www.netdata.cloud/) - [Github](https://github.com/netdata/netdata) ): Monitorizar tus servicios y tu servidor en general no puede ser más fácil que con Netdata, es super fácil de integrar, y aunque poco tiene que hacer contra dashboards como Grafana, ya viene preconfigurado lo cual es un plus para algunos. 
 - 🔐 **Nginx Proxy Manager** ( [Website](https://nginxproxymanager.com/) - [GitHub](https://github.com/NginxProxyManager/nginx-proxy-manager) ): Es un reverse-proxy muy cómodo y que requiere poco conocimiento técnico para exponer tus servicios, fué de los primeros reverse-proxys que aprendí a usar y sigue siendo mi elección principal.
+- ⏲️ **Watchtower** ( [Website](https://containrrr.dev/watchtower/) - [GitHub](https://github.com/containrrr/watchtower/) ): Uno no puede estar atento a su servidor 24/7 es por eso que tener a un container vigilando por las actualizaciones automáticas es muy cómodo, tampoco es buena idea abusar del el. Solo dejarlo actualizar aquellos containers que sabes que tienen actualizaciones estables y regulares. 
 
 
 # ¿Porqué Panamax? 🚢

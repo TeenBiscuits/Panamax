@@ -1,0 +1,30 @@
+# SPDX-FileCopyrightText: 2024 Pablo Portas López
+#
+# SPDX-License-Identifier: MIT
+
+version: "3"
+services:
+  watchtower:
+    container_name: watchtower
+    image: containrrr/watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock # Importante el acceso al docker.sock
+      - /etc/localtime:/etc/localtime:ro # Asi estará en tu Localtime
+    environment:
+      # Este es el intervalo con el que ocurre la comprovación en mi caso 7 de la mañana de los Sábados
+      - WATCHTOWER_SCHEDULE=0 0 7 ? * SAT # Cron expression in 6 fields - https://pkg.go.dev/github.com/robfig/cron@v1.2.0#hdr-CRON_Expression_Format
+      - WATCHTOWER_NO_STARTUP_MESSAGE=true # Esto te evita un correo cada vez que el container se encienda
+      - WATCHTOWER_CLEANUP=true
+      # Personalmente me gusta que me llegue un correo para saber que todo fue bien
+      - WATCHTOWER_NOTIFICATIONS=email
+      - WATCHTOWER_NOTIFICATION_EMAIL_FROM=${EMAIL_USER}
+      - WATCHTOWER_NOTIFICATION_EMAIL_TO=${EMAIL_TO}
+      - WATCHTOWER_NOTIFICATION_EMAIL_SERVER=${EMAIL_SERVER}
+      - WATCHTOWER_NOTIFICATION_EMAIL_SERVER_PASSWORD=${EMAIL_PASSWORD}
+      - WATCHTOWER_NOTIFICATION_EMAIL_SUBJECTTAG=${EMAIL_SUBJECT}
+      - WATCHTOWER_NOTIFICATION_EMAIL_SERVER_USER=${EMAIL_USER}
+      - WATCHTOWER_NOTIFICATION_EMAIL_SERVER_PORT=${EMAIL_PORT}
+      - WATCHTOWER_SCOPE=updater # Este es el label que usaras en el resto de containers, como esta definido más abajo
+    labels:
+      - "com.centurylinklabs.watchtower.scope=updater" # Añade esta label a todo lo que quieras que se actualices automaticamente
+    restart: unless-stopped
