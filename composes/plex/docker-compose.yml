@@ -1,0 +1,45 @@
+# SPDX-FileCopyrightText: 2024 Pablo Portas López
+#
+# SPDX-License-Identifier: MIT
+
+version: ‘3.7’
+services:
+ plex:
+  image: plexinc/pms-docker # Imagen Oficial de Plex
+  restart: unless-stopped
+  container_name: plexms
+  ports:
+   # El primero es el importante, yo lo redirijo por proxy pero puedes abrirlo directamente
+   # ya que Plex apuntara por defecto a el.
+   #- 32400:32400/tcp
+   # Para saber más - https://support.plex.tv/articles/201543147-what-network-ports-do-i-need-to-allow-through-my-firewall/
+   # Puertos para la Local Network
+   #- 8324:8324/tcp # (controlling Plex for Roku via Plex Companion)
+   #- 32469:32469/tcp # (access to the Plex DLNA Server)
+   #- 1900:1900/udp # (access to the Plex DLNA Server)
+   #- 32410:32410/udp # (current GDM network discovery)
+   #- 32412:32412/udp # (current GDM network discovery)
+   #- 32413:32413/udp # (current GDM network discovery)
+   #- 32414:32414/udp # (current GDM network discovery)
+  environment:
+   - TZ=Europe/Madrid
+   - PLEX_CLAIM=${PLEX_CLAIM} # Se genera aquí - https://www.plex.tv/claim/
+   - HOSTNAME="My Plex Server" # Ponle un hostname chulo
+   - ADVERTISE_IP="http://127.0.0.1:32400/" # Cambiar por IP local de la máquina
+  devices:
+   - /dev/dri:/dev/dri # Depende de tu GPU
+  volumes:
+   - ${CONFIG_DIR}:/config
+   - ${TRANSCODE_DIR}:/transcode
+   - ${DATA1_DIR}:/data/DATA1
+   # -  ${DATA2_DIR}:/data/DATA2 # Puedes añadir cuantos quieras
+  labels:
+   - "com.centurylinklabs.watchtower.scope=updater" # Utilizo esta label para que WatchTower actualice mis containers
+  networks:
+   - proxy-network
+   - internal
+
+networks:
+  proxy-network:
+    external: true
+  internal:
