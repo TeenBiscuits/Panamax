@@ -9,7 +9,7 @@ SPDX-License-Identifier: MIT
 <div align="center">
 
 [![Docker](https://img.shields.io/badge/Docker-2496ED.svg?logo=docker&logoColor=white)](https://www.docker.com/)
-[![Composes](https://img.shields.io/badge/Composes-3-2496ED.svg?logo=docker&logoColor=white)](./composes)
+[![Composes](https://img.shields.io/badge/Composes-6-2496ED.svg?logo=docker&logoColor=white)](./composes)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](./CODE_OF_CONDUCT.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 [![Stars](https://img.shields.io/github/stars/TeenBiscuits/Panamax.svg)](https://github.com/TeenBiscuits/Panamax)
