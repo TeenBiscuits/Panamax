@@ -19,7 +19,6 @@ de mi breve experiencia como [Self-Hoster](https://es.wikipedia.org/wiki/Self-ho
 
 </div>
 
-> ⚠️ Este repositorio está en **desarrollo activo**, se esperan cambios frecuentes. ⚠️
 
 # Composes 📚
 
@@ -32,6 +31,24 @@ de mi breve experiencia como [Self-Hoster](https://es.wikipedia.org/wiki/Self-ho
 - 🗃️ **Syncthing** ( [Website](https://syncthing.net/) - [GitHub](https://github.com/syncthing/syncthing) ): Syncthing es una herramienta muy versátil para la sincronización de archivos entre máquinas, y una solución alternativa y más ligera para quien solo necesite sincronizar archivos y no quiera levantar una instancia de Nextcloud entera.
 - ⏲️ **Watchtower** ( [Website](https://containrrr.dev/watchtower/) - [GitHub](https://github.com/containrrr/watchtower/) ): Uno no puede estar atento a su servidor 24/7 es por eso que tener a un container vigilando por las actualizaciones automáticas es muy cómodo, tampoco es buena idea abusar del el. Solo dejarlo actualizar aquellos containers que sabes que tienen actualizaciones estables y regulares.
 
+# Otros recursos interesantes 🧐
+
+- 😎 **Awesome Selfhosted** ( [Website](https://awesome-selfhosted.net/#software) - [GitHub](https://github.com/awesome-selfhosted/awesome-selfhosted) ): Lista en la que me inspiré para hacer este repositorio, es realmente util y me ha ayudado a descubrir varias de estas herramientas.
+- 🐧 **LinuxServer.io** ( [Website](https://www.linuxserver.io/) - [GitHub](https://github.com/linuxserver) ): Muchas de las imágenes que uso son mantenidas por linuxserver.io, son imágenes en algunos casos mejor mantenidas que las oficiales y facilita en gran medida el levantar muchos de estos servicios.
+
+## Youtube 📹
+
+Algunos canales interesantes de la comunidad **SelfHoster** y **Open Source** en general.
+
+<div align="center">
+
+| 📺 [DB Tech](https://www.youtube.com/@DBTechYT) | 📺 [Christian Lempa](https://www.youtube.com/@christianlempa) | 📺 [Hardware Haven](https://www.youtube.com/@HardwareHaven) |
+|---|---|---|
+| 📺 [Techno Tim](https://www.youtube.com/@TechnoTim) | 📺 [Wolfgang's Channel](https://www.youtube.com/@WolfgangsChannel) | 📺 [Jeff Geerling](https://www.youtube.com/@JeffGeerling) |
+| 📺 [NetworkChuck](https://www.youtube.com/@NetworkChuck) | 📺 [SpaceRex](https://www.youtube.com/@SpaceRexWill) | 📺 [Learn Linux TV](https://www.youtube.com/@LearnLinuxTV) |
+| 📺 [TechHut](https://www.youtube.com/@TechHut) | 📺 [The Linux Experiment](https://www.youtube.com/@TheLinuxEXP) | 📺 [Linus Tech Tips](https://www.youtube.com/@LinusTechTips) |
+
+</div>
 
 # ¿Porqué Panamax? 🚢
 
