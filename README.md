@@ -4,7 +4,7 @@ SPDX-FileCopyrightText: 2024 Pablo Portas López
 SPDX-License-Identifier: MIT
 -->
 
-# Panamax 🚢📦
+# Panamax 📦🚢
 
 <div align="center">
 
@@ -14,7 +14,7 @@ SPDX-License-Identifier: MIT
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 [![Stars](https://img.shields.io/github/stars/TeenBiscuits/Panamax.svg)](https://github.com/TeenBiscuits/Panamax)
 
-**Panamax** 🚢📦 es una recopilación de [Docker Composes](https://docs.docker.com/compose/) que me han sido útiles a lo largo
+**Panamax** 📦🚢 es una recopilación de [Docker Composes](https://docs.docker.com/compose/) que me han sido útiles a lo largo
 de mi breve experiencia como [Self-Hoster](https://es.wikipedia.org/wiki/Self-hosting). 💻🏠
 
 </div>
